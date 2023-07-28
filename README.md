@@ -62,139 +62,139 @@ ____
 Below are screenshots of the software product with a description.
 
 Main page (for not authorized user):
-![](screenshots/1.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/1.PNG)
 
 Main page (for authorized user):
-![](screenshots/1.1.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/1.1.PNG)
 
 Search posts by title:
-![](screenshots/2.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/2.PNG)
 
 Filtering posts by category:
-![](screenshots/3.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/3.PNG)
 
 Pagination and up button:
-![](screenshots/4.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/4.PNG)
 
 Posts details:
-![](screenshots/5.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/5.PNG)
 
 Post details functions for author:
-![](screenshots/6.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/6.PNG)
 
 Post details functions for user:
-![](screenshots/6.1.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/6.1.PNG)
 
 Post details functions for guest:
-![](screenshots/6.2.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/6.2.PNG)
 
 Post details footer:
-![](screenshots/6.3.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/6.3.PNG)
 
 Edit post:
-![](screenshots/6.4.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/6.4.PNG)
 
 Delete post:
-![](screenshots/6.5.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/6.5.PNG)
 
 Add post:
-![](screenshots/6.6.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/6.6.PNG)
 
 Liked post:
-![](screenshots/6.7.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/6.7.PNG)
 
 Other user profile page:
-![](screenshots/7.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/7.PNG)
 
 Your user profile page:
-![](screenshots/7.1.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/7.1.PNG)
 
 Your user profile page posts list:
-![](screenshots/7.2.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/7.2.PNG)
 
 Edit Profile Settings:
-![](screenshots/7.3.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/7.3.PNG)
 
 Edit Profile Page:
-![](screenshots/7.4.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/7.4.PNG)
 
 Admin profile:
-![](screenshots/7.5.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/7.5.PNG)
 
 Create Profile Page:
-![](screenshots/7.6.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/7.6.PNG)
 
 Profile with default photo:
-![](screenshots/7.7.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/7.7.PNG)
 
 Don`t Have Profile:
-![](screenshots/7.8.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/7.8.PNG)
 
 Add comment page:
-![](screenshots/8.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/8.PNG)
 
 Added comment:
-![](screenshots/8.1.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/8.1.PNG)
 
 Add comment page for not authorized user:
-![](screenshots/8.2.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/8.2.PNG)
 
 User menu:  
-![](screenshots/9.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/9.PNG)
 
 User menu for new user:     
-![](screenshots/9.1.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/9.1.PNG)
 
 Categories list:
-![](screenshots/10.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/10.PNG)
 
 Contacts page:
-![](screenshots/11.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/11.PNG)
 
 Contact form:
-![](screenshots/12.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/12.PNG)
 
 Favorite posts page (blank):
-![](screenshots/13.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/13.PNG)
 
 Favorite posts page with post:
-![](screenshots/13.1.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/13.1.PNG)
 
 Changed language:
-![](screenshots/14.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/14.PNG)
 
 Change language:        
-![](screenshots/14.1.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/14.1.PNG)
 
 Add category (only for admin):
-![](screenshots/15.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/15.PNG)
 
 Admin panel (only for admin):
-![](screenshots/16.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/16.PNG)
 
 Registration:
-![](screenshots/17.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/17.PNG)
 
 Authorization:
-![](screenshots/17.1.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/17.1.PNG)
 
 Authorization:
-![](screenshots/18.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/18.PNG)
 
 Site footer:
-![](screenshots/19.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/19.PNG)
 
 Categories drop-down list:     
-![](screenshots/20.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/20.PNG)
 
 Fav icon:   
-![](screenshots/21.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/21.PNG)
 
 Post with default image:
-![](screenshots/22.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/22.PNG)
 
 Help page:
-![](screenshots/23.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/23.PNG)
 
 Help page search:
-![](screenshots/23.1.png)
+![](https://github.com/MishanyaS/itblog/blob/main/screenshots/23.1.PNG)
