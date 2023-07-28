@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Categories List' %}{% endblock title %}
+
+{% block content %}
+
+<h1 class="text-center">{% trans 'Categories List' %}</h1>
+
+{% for item in cat_menu_list %}
+    <a href="{% url 'category' item|slugify %}" class="list-group-item list-group-item-action" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+            <h3 class="mb-1 text-capitalize">{{ item.name }}</h3>
+            {% if item.svg_icon %}
+                <img src="{{ item.svg_icon.url }}" height="30px;" alt="{% trans 'Svg icon' %}" />
+            {% elif item.icon %}
+                <img src="{{ item.icon.url }}" height="30px;" alt="{% trans 'Icon' %}" />
+            {% endif %}
+        </div>
+        {% if item.description %}
+            <p class="mb-1">{{ item.description|safe|linebreaks }}</p>
+        {% else %}
+            <p class="mb-1 text-muted">{% trans 'There is no description' %}</p>
+        {% endif %}
+    </a>
+{% endfor %}
+
+{% endblock content %}

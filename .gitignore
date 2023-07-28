@@ -1,0 +1,11 @@
+# ignore vscode
+.vscode/
+
+# ignore venv
+venv/
+
+# ignore db.sqlite3
+db.sqlite3
+
+# ignore env
+.env

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Edit Profile Settings' %}{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1 class="text-center">{% trans 'Edit Profile Settings' %}</h1>
+{% endif %}
+
+<div class="container">
+
+  {% if user.is_authenticated %}
+      <form method="POST" enctype="multipart/form-data" class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success btn-sm" id="edit_profile_button_id">{% trans 'Edit Profile' %}</button>
+        <a href="{% url 'home' %}" class="btn btn-danger btn-sm">{% trans 'Back' %}</a>
+      </form>
+  {% else %}
+    <h1 class="text-center text-uppercase text-danger">{% trans 'You are not authorized!!!' %} <br/> {% trans 'This page is only for authorized users!!!' %}</h1>
+  {% endif %}
+</div>
+
+{% endblock content %}

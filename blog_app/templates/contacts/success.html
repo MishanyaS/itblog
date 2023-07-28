@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<br />
+
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">{% trans 'Email sent successfully!' %}</h4>
+  <p>
+    {% trans 'Thanks for your letter. We will definitely take into account your comments and improve our web platform.' %}
+  </p>
+  <hr>
+  <p class="mb-0"><a href="{% url 'home' %}" class="btn btn-danger btn-sm">{% trans 'Back' %}</a></p>
+</div>
+{% endblock content %}

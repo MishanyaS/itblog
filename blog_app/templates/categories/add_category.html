@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Add Category' %}{% endblock title %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+  <h1 class="text-center">{% trans 'Add Category' %}</h1>
+{% endif %}
+
+<div class="container">
+
+  {% if user.is_authenticated %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <img src="{% static 'blog_app/images/info.svg' %}" width="30px;" alt="{% trans 'Info' %}">
+      <ul>
+          <li>
+            {% trans 'You must write category in small letters.' %}
+          </li>
+          <li>
+            {% trans 'Category description is not required.' %}
+          </li>
+      </ul>
+      <button type="button" class="btn-close bg-danger" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" class="form-group">
+      {% csrf_token %}
+      {{ form.media }}
+      {{ form.as_p }}
+      <button class="btn btn-success btn-sm" id="add_category_button_id">{% trans 'Add Category' %}</button>
+      <a href="{% url 'home' %}" class="btn btn-danger btn-sm">{% trans 'Back' %}</a>
+    </form>
+  {% else %}
+    <h1 class="text-center text-uppercase text-danger">{% trans 'You are not authorized!!!' %} <br/> {% trans 'This page is only for authorized users!!!' %}</h1>
+  {% endif %}
+
+</div>
+
+<script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+
+<script>
+  // Run this code when the window finishes loading
+  window.onload = function() {
+    // Replace the textarea element with ID 'myeditor' with CKEditor
+      CKEDITOR.replace('myeditor');
+  };
+</script>
+
+{% endblock content %}

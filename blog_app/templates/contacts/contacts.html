@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Contacts' %}{% endblock title %}
+
+{% block content %}
+<h1 class="text-center">{% trans 'Contacts' %}</h1>
+
+<div class="text-center">
+  <a data-bs-toggle="modal" data-bs-target="#SendEmailModal" class="btn btn-success btn-sm"  id="send_email_button_id">{% trans 'Send Email' %}</a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bg-dark" id="SendEmailModal" tabindex="-1" aria-labelledby="SendEmailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="SendEmailModalLabel">{% trans 'Email To Admin' %}</h5>
+          <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <img src="{% static 'blog_app/images/info.svg' %}" width="30px;" alt="{% trans 'Info' %}">
+            <ul>
+                <li>
+                  {% trans 'You can write us your letter with wishes for improving the software product.' %}
+                </li>
+                <li>
+                  {% trans 'Please be polite in your letter. We will definitely take into account your wishes.' %}
+                </li>
+            </ul>
+            <button type="button" class="btn-close bg-danger" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+            <form method="POST" action="{% url 'contacts' %}" class="form-group">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="Email" class="form-label">{% trans 'Email Address' %}</label>
+                    <input type="email" class="form-control" id="email_id" name="email" placeholder="{% trans 'Email Address' %}">
+                </div>
+                <div class="mb-3">
+                    <label for="Subject" class="form-label">{% trans 'Subject' %}</label>
+                    <input type="text" name="subject" class="form-control" id="subject_id" placeholder="{% trans 'Subject' %}">
+                </div>
+                <div class="mb-3">
+                    <label for="message_id" class="form-label">{% trans 'Email Text' %}</label>
+                    <textarea class="form-control" id="message_id" name="message" placeholder="{% trans 'Email Text' %}" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">{% trans 'Close' %}</button>
+                    <button type="submit" class="btn btn-success btn-sm" id="send_button_id">{% trans 'Send' %}</button>
+                </div>
+            </form>            
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Get the value of the email from the backend and store it in the 'email' variable
+  let email = "{{ user.email }}";
+  // Set the value of the element with the ID 'email_id' to the 'email' variable
+  document.getElementById("email_id").value = email;
+</script>
+
+{% endblock content %}

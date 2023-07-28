@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load hitcount_tags %}
+{% load i18n %}
+
+{% block title %}{% trans 'Post' %}{% endblock title %}
+
+{% block content %}
+
+</br>
+
+<div class="row align-items-start">
+    <div class="col-lg-3 col-md-12 col-sm-12">
+      <div class="list-group">
+        <h3 class="list-group-item list-group-item-action">{% trans 'Category' %}</h3>
+      
+        {% for item in cat_menu %}
+        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <a class="text-capitalize" href="{% url 'category' item|slugify %}">{{ item }}</a>
+          {% if item.svg_icon %}
+            <img src="{{ item.svg_icon.url }}" height="30px;" alt="{% trans 'Svg icon' %}" />
+          {% elif item.icon %}
+            <img src="{{ item.icon.url }}" height="30px;" alt="{% trans 'Icon' %}" />
+          {% endif %}
+        </li>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-lg-9 col-md-12 col-sm-12">
+      <div class="container">
+        <h2 class="text-center text-capitalize">{{post.post_title}}</h2>
+        {% if post.post_image %}
+          <img src="{{post.post_image.url}}" class="img-fluid" alt="{% trans 'Post image' %}">
+        {% else %}
+          <img src="{% static 'blog_app/images/default_post_image.jpg' %}" class="img-fluid" alt="{% trans 'Post image' %}">
+        {% endif %}
+        <p class="justify"><span class="text-break">{{post.post_content|safe|linebreaks}}</span></p>
+
+        <a href="{% url 'home' %}" class="btn btn-danger btn-sm">{% trans 'Back' %}</a>
+        {% if user.is_authenticated %}
+          {% if user.id == post.post_author.id %}
+            <a href="{% url 'edit_post' post.pk %}" class="btn btn-success btn-sm">{% trans 'Edit Post' %}</a>
+            <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">{% trans 'Delete Post' %}</a>
+          {% endif %}
+        {% endif %}
+
+        <br/><br/>
+
+        {% if user.is_authenticated %}
+          <form method="post" action="{% url 'post_details' post.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-warning btn-sm text-white">
+                  {% if user in post.favorites.all %}
+                    {% trans 'Remove from Favorites' %}
+                  {% else %}
+                    {% trans 'Add to Favorites' %}
+                  {% endif %}
+              </button>
+          </form>
+        {% endif %}
+
+        <br/>
+
+        {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'like_post' post.pk %}">
+          {% csrf_token %}
+          <button type="submit" name="like" class="btn">
+            {% if user in object.likes.all %}
+              <img src="{% static 'blog_app/images/dislike.svg' %}" height="30px;" width="30px;" alt="{% trans 'Dislike' %}">
+            {% else %}
+              <img src="{% static 'blog_app/images/like.svg' %}" height="30px;" width="30px;" alt="{% trans 'Like' %}">
+            {% endif %}
+          </button>
+        </form>
+        {% endif %}
+
+        <hr/>
+
+        <small class="text-muted">{% trans 'Likes' %} {{ object.likes.count  }} | {% trans 'Views' %} <img src="{% static 'blog_app/images/views.svg' %}" alt="{% trans 'Views' %}"> {% get_hit_count for post %} | {% trans 'Posted' %} <img src="{% static 'blog_app/images/date.svg' %}" alt="{% trans 'Date' %}"> {{post.post_date|timesince}} {% trans 'ago' %} | {% trans 'Category' %} <img src="{% static 'blog_app/images/category.svg' %}" alt="{% trans 'Category' %}"> <a class="text-capitalize" href="{% url 'category' post.post_category|slugify %}">{{post.post_category}}</a> | {% trans 'Author' %} <img src="{% static 'blog_app/images/author.svg' %}" alt="{% trans 'Author' %}"> <a href="{% url 'profile_page' post.post_author.profile.id %}">{{post.post_author.first_name}} {{post.post_author.last_name}}<a></small>
+
+        <br/>
+        <br/>
+
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              {% if post.post_author.profile.user_photo %}
+                <img src="{{ post.post_author.profile.user_photo.url }}" class="img-fluid rounded-start" alt="{% trans 'User photo' %}">
+              {% else %}
+                <img src="{% static 'blog_app/images/default_user_photo.png' %}" style="height=200px; width=200px;" class="img-fluid rounded-start" alt="{% trans 'Default user photo' %}">
+              {% endif %}
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ post.post_author.first_name }} {{ post.post_author.last_name }}</h5>
+                <p class="card-text">{{ post.post_author.profile.user_description|truncatechars:50|safe|linebreaks }}</p>
+                <p class="card-text"><small class="text-muted">{% trans 'Username:' %} {{ post.post_author.username }}</small></p>
+                {% if post.post_author.profile.user_github_url %}
+                  <p class="card-text"><small class="text-muted">{% trans 'GitHub:' %} <a href="{{ post.post_author.profile.user_github_url }}">{{ post.post_author.profile.user_github_url }}</a></small></p>
+                {% endif %}
+                {% if post.post_author.profile.user_github_url %}
+                  <p class="card-text"><small class="text-muted">{% trans 'Social Network:' %} <a href="{{ post.post_author.profile.user_link }}">{{ post.post_author.profile.user_link }}</a></small></p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br/>
+
+        <h2>{% trans 'Comments' %} ({{ comments_count }})</h2>
+        <br/>
+        {% if not post.comments.all %}
+          {% trans 'No Comments Yet' %} <a href="{% url 'add_comment' post.pk %}" class="btn btn-success btn-sm">{% trans 'Add Comment' %}</a>
+
+            <br/>
+        {% else %}
+            <a href="{% url 'add_comment' post.pk %}" class="btn btn-success btn-sm">{% trans 'Add Comment' %}</a>
+            <br/><br/>
+            {% for comment in post.comments.all %}
+
+                <div class="card mb-3 bg-light border-primary">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5 class="card-title text-primary">{{ comment.name }}</h5>
+                      <small class="text-muted">{{ comment.comment_date }}</small>
+                    </div>
+                    <p class="card-text">{{ comment.comment_content|safe|linebreaks }}</p>
+                  </div>
+                </div>
+
+                <br/>
+
+            {% endfor %}
+
+            <a href="{% url 'add_comment' post.pk %}" class="btn btn-success btn-sm">{% trans 'Add Comment' %}</a>
+
+            <br/>
+
+        {% endif %}
+
+        <br/>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

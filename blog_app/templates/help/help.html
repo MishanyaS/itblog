@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Help' %}{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center">{% trans 'Help' %}</h2>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <img src="{% static 'blog_app/images/info.svg' %}" width="30px;" alt="{% trans 'Info' %}">
+        <ul>
+            <li>
+                {% trans 'Use keywords for searching like "add", "edit", "delete", "email", "information", "category", "profile", "logout", "register", "login".' %}
+            </li>
+        </ul>
+        <button type="button" class="btn-close bg-danger" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <input type="text" id="searchInput" class="form-control" placeholder="Input keyword for searching">
+
+    <div class="table-responsive">
+        <table id="dataTable" class="table table-hover">
+            <thead>
+            <tr>
+                <th>{% trans 'Question' %}</th>
+                <th>{% trans 'Reply' %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{% trans 'How to add post ?' %}</td>
+                <td>{% trans 'Choose "Registration" -> Choose "Login" -> Choose "Add Post" -> Fill in the fields -> Press button "Add Post"' %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'How to send email to Admin ?' %}</td>
+                <td>{% trans 'Choose "Contacts" -> Press button "Send Email" -> Fill in the fields -> Press button "Send"' %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Where to read an information about category/categories ?' %}</td>
+                <td>{% trans 'Choose "Categories List" -> Press button "Send Email" -> Fill in the fields -> Press button "Send"' %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'How to edit profile settings ?' %}</td>
+                <td>{% trans 'Press "First Name Last Name|Username" -> Press "Edit Profile Settings" -> Change settings that you want -> Press button "Edit Profile"' %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'How to edit profile page ?' %}</td>
+                <td>{% trans 'Press "First Name Last Name|Username" -> Press "Edit Profile Page" -> Change settings that you want -> Press button "Edit Profile Page"' %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'How to view my profile ?' %}</td>
+                <td>{% trans 'Press "First Name Last Name|Username" -> Press "Profile"' %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'How to Logout ?' %}</td>
+                <td>{% trans 'Press "First Name Last Name|Username" -> Press "Logout"' %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'How to Register ?' %}</td>
+                <td>{% trans 'Choose "Registration" -> Fill in the fields -> Press button "Register"' %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'How to Login ?' %}</td>
+                <td>{% trans 'Choose "Login" -> Fill in the fields -> Press button "Login"' %}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{% static 'blog_app/js/search.js' %}"></script>
+
+{% endblock content %}

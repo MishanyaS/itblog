@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Profile' %}{% endblock title %}
+
+{% block content %}
+<h1 class="text-center">{% trans 'Profile' %}</h1>
+
+<div class="container">
+
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            {% if page_user.user_photo %}
+              <img src="{{ page_user.user_photo.url }}" style="height=200px; width=200px;" class="img-fluid rounded-start" alt="{% trans 'User photo' %}">
+            {% else %}
+              <img src="{% static 'blog_app/images/default_user_photo.png' %}" style="height=200px; width=200px;" class="img-fluid rounded-start" alt="{% trans 'Default user photo' %}">
+            {% endif %}
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h5>
+              <p class="card-text">{{ page_user.user_description }}</p>
+              <p class="card-text"><small class="text-muted">{% trans 'Username:' %} {{ page_user.user.username }}</small></p>
+              {% if page_user.user_github_url %}
+                <p class="card-text"><small class="text-muted">{% trans 'GitHub:' %} <a href="{{ page_user.user_github_url }}">{{ page_user.user_github_url }}</a></small></p>
+              {% endif %}
+              {% if page_user.user_github_url %}
+                <p class="card-text"><small class="text-muted">{% trans 'Social Network:' %} <a href="{{ page_user.user_github_url }}">{{ page_user.user_github_url }}</a></small></p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <h3 class="text-center">{% trans 'User Info' %}</h3>
+    
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">{% trans 'First Name' %}</th>
+            <th scope="col">{% trans 'Last Name' %}</th>
+            <th scope="col">{% trans 'Username' %}</th>
+            <th scope="col">{% trans 'Email' %}</th>
+            <th scope="col">{% trans 'Creation Date' %}</th>
+            <th scope="col">{% trans 'Phone' %}</th>
+            <th scope="col">{% trans 'Social Network' %}</th>
+            <th scope="col">{% trans 'GitHub' %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ page_user.user.first_name }}</td>
+            <td>{{ page_user.user.last_name }}</td>
+            <td>{{ page_user.user.username }}</td>
+            <td>{{ page_user.user.email }}</td>
+            <td>{{ page_user.user.profile.registration_date }}</td>
+            <td>{{ page_user.user.profile.phone }}</td>
+            <td>{{ page_user.user.profile.user_link }}</td>
+            <td>{{ page_user.user.profile.user_github_url }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {% if user.username == page_user.user.username %}
+    <h3 class="text-center">{% trans 'User Functions' %}</h3>
+
+    <div class="text-center">
+      <a href="{% url 'add_post' %}" class="btn btn-success btn-sm">{% trans 'Add Post' %}</a>
+      <a href="{% url 'edit_profile' %}" class="btn btn-success btn-sm" style="text-transform: capitalize">{% trans 'Edit Profile' %}</a>
+      {% if user.username == "admin" %}
+          <a href="{% url 'add_category' %}" class="btn btn-success btn-sm">{% trans 'Add Category' %}</a>
+          <a href="{% url 'admin:index' %}" class="btn btn-success btn-sm" style="text-transform: capitalize">{% trans 'Admin Panel' %}</a>
+      {% endif %}
+      {% if user.profile.id %}
+          <a href="{% url 'edit_profile_page' user.profile.id %}" class="btn btn-success btn-sm text-capitalize">{% trans 'Edit Profile Page' %}</a>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <h3 class="text-center">{% trans 'Posts Count' %}</h3>
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">{% trans 'Posts Count' %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ posts_count }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-center">{% trans 'Posts List' %}</h3>
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">{% trans 'ID' %}</th>
+            <th scope="col">{% trans 'Post Title' %}</th>
+            <th scope="col">{% trans 'Post Category' %}</th>
+            <th scope="col">{% trans 'Post Date' %}</th>
+            <th scope="col">{% trans 'Post Author' %}</th>
+            {% if user.username == page_user.user.username %}
+            <th scope="col">{% trans 'Post Details' %}</th>
+            <th scope="col">{% trans 'Edit Post' %}</th>
+            <th scope="col">{% trans 'Delete Post' %}</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in posts %}
+          <tr>
+            <td>{{ post.pk }}</td>
+            <td><a class="#" href="{% url 'post_details' post.pk %}">{{post.post_title}}</a></td>
+            <td><a class="text-capitalize" href="{% url 'category' post.post_category|slugify %}">{{post.post_category}}</a></td>
+            <td>{{post.post_date|timesince}}</td>
+            <td>{{post.post_author.first_name}} {{post.post_author.last_name}}</td>
+            {% if user.username == page_user.user.username %}
+            <td><a href="{% url 'post_details' post.pk %}" class="btn btn-success btn-sm">{% trans 'Details' %}</a></td>
+            <td><a href="{% url 'edit_post' post.pk %}" class="btn btn-success btn-sm">{% trans 'Edit' %}</a></td>
+            <td><a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">{% trans 'Delete' %}</a></td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+</div>
+
+{% endblock content %}

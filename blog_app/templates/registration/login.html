@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Login' %}{% endblock title %}
+
+{% block content %}
+<h1 class="text-center">{% trans 'Login' %}</h1>
+
+<div class="container">
+
+    <div class='form-group'>
+        <form method="POST" enctype="multipart/form-data" class="form-group">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="username" class="form-label">{% trans 'Username' %}</label>
+                <input id="username_id" type="text" class="form-control" name="username" placeholder="{% trans 'Username' %}">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">{% trans 'Password' %}</label>
+                <input id="password_id" type="password" class="form-control" name="password" placeholder="{% trans 'Password' %}">
+            </div>
+
+            <button class="btn btn-success btn-sm" id="login_button_id">{% trans 'Login' %}</button>
+
+            {% trans 'Not a user ?' %} <a href="{% url 'registration' %}">{% trans 'Register Here' %}</a>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Edit Profile Page' %}{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1 class="text-center">{% trans 'Edit Profile Page' %}</h1>
+{% endif %}
+
+<div class="container">
+
+  {% if user.is_authenticated %}
+    {% if user.id == profile.user.id %}
+    <form method="POST" enctype="multipart/form-data" class="form-group">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-success btn-sm" id="edit_profile_page_button_id">{% trans 'Edit Profile Page' %}</button>
+      <a href="{% url 'home' %}" class="btn btn-danger btn-sm">{% trans 'Back' %}</a>
+    </form>
+    {% else %}
+        <h1 class="text-center text-uppercase text-danger">{% trans 'You are not authorized!!!' %} <br/> {% trans 'This page is only for authorized users!!!' %}</h1>
+    {% endif %}
+  {% else %}
+    <h1 class="text-center text-uppercase text-danger">{% trans 'You are not authorized!!!' %} <br/> {% trans 'This page is only for authorized users!!!' %}</h1>
+  {% endif %}
+</div>
+
+{% endblock content %}

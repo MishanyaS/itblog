@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Delete Post' %}{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1 class="text-center">{% trans 'Delete Post' %} "{{ post.post_title }}"</h1>
+{% endif %}
+
+<div class="container">
+
+  {% if user.is_authenticated %}
+    {% if user.id == post.post_author.id %}
+      <form method="POST" enctype="multipart/form-data" class="form-group">
+        {% csrf_token %}
+        <p>{% trans 'Do you want to delete this post ?' %}</p>
+        <button class="btn btn-danger btn-sm">{% trans 'Delete Post' %}</button>
+        <a href="{% url 'home' %}" class="btn btn-danger btn-sm">{% trans 'Back' %}</a>
+      </form>
+    {% else %}
+      <h1 class="text-center text-uppercase text-danger">{% trans 'It`s not your post !!!' %}</h1>
+    {% endif %}
+  {% else %}
+  <h1 class="text-center text-uppercase text-danger">{% trans 'You are not authorized!!!' %} <br/> {% trans 'This page is only for authorized users!!!' %}</h1>
+  {% endif %}
+</div>
+
+{% endblock content %}

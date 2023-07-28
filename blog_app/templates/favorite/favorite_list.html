@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans 'Favorite Posts' %}{% endblock title %}
+{% block content %}
+
+  {% if favorites %}
+
+  <h2 class="text-center">{% trans 'Favorite Posts' %}</h2>
+
+    {% for favorite in favorites %}
+      <div class="card mb-3">
+
+        <div class="card">
+          {% if favorite.post.post_image %}
+          <img src="{{favorite.post.post_image.url}}" style="height:250px;" class="card-img-top" alt="{% trans 'Post image' %}">
+          {% else %}
+            <img src="{% static 'blog_app/images/default_post_image.jpg' %}" style="height:250px;" class="card-img-top" alt="{% trans 'Post image' %}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title"><a class="#" href="{% url 'post_details' favorite.post.pk %}">{{favorite.post.post_title}}</a></h5>
+            <p class="card-text">{{favorite.post.post_content|truncatechars:50|safe|linebreaks}}</p>
+          </div>
+          <div class="card-footer">
+            <form method="post" action="{% url 'post_details' favorite.post.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-warning btn-sm text-white">
+                {% trans 'Remove from Favorites' %}
+              </button>
+            </form>
+            <small class="text-muted"><img src="{% static 'blog_app/images/date.svg' %}" alt="{% trans 'Date' %}"> {{favorite.post.post_date|timesince}} | <img src="{% static 'blog_app/images/category.svg' %}" alt="{% trans 'Category' %}"> <a class="text-capitalize" href="{% url 'category' favorite.post.post_category|slugify %}">{{favorite.post.post_category}}</a> | <img src="{% static 'blog_app/images/author.svg' %}" alt="{% trans 'Author' %}"> <a class="#" href="{% url 'profile_page' favorite.post.post_author.profile.id %}">{{favorite.post.post_author.first_name}} {{favorite.post.post_author.last_name}}</a></small> <!-- timesince or date:"Y-m-d H:i" -->
+          </div>
+        </div>
+
+      </div>
+    {% endfor %}
+    {% if favorites.has_other_pages %}
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          {% if favorites.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ favorites.previous_page_number }}">{% trans 'Previous' %}</a>
+            </li>
+          {% endif %}
+          {% for page in favorites.paginator.page_range %}
+            {% if page == favorites.number %}
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">{{ page }}</a>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% if favorites.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ favorites.next_page_number }}">{% trans 'Next' %}</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  {% else %}
+    <h1 class="text-center text-uppercase text-danger">{% trans 'You have no favorite posts yet' %}</h1>
+  {% endif %}
+{% endblock content %}
